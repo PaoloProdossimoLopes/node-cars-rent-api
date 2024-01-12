@@ -16,4 +16,8 @@ export class CategoriesRepository {
     }
     this.categories.push(category)
   }
+
+  findMany(): Category[] {
+    return this.categories
+  }
 }
