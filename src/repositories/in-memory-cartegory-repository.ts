@@ -1,22 +1,19 @@
 import { Category } from "../model/category";
+import { CategoriesRepository, CreateCategoryData } from "./categories-reopsitory";
 
-interface CreateCategoryData {
-  name: string
-  description: string
-}
-
-export class CategoriesRepository {
+export class InMemoryCategoriesRepository implements CategoriesRepository {
   private categories: Category[] = []
   
-  create({ name, description }: CreateCategoryData) {
+  create({ name, description }: CreateCategoryData): Category {
     const category: Category = {
       name,
       description, 
       createdAt: new Date()
     }
     this.categories.push(category)
+    return category
   }
-
+  
   findMany(): Category[] {
     return this.categories
   }

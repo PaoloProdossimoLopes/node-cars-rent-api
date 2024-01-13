@@ -1,25 +1,40 @@
 import { Router } from 'express'
-import { CategoriesRepository } from '../repositories/cartegory-repository';
+import { InMemoryCategoriesRepository } from '../repositories/in-memory-cartegory-repository';
+import { StatusCode } from '../status-code';
+import { CreateCategorySerice } from '../services/create-category.service';
+import { FindAllCategoriesService } from '../services/find-all-categories.service';
 
 export const categoriesRoutes = Router()
-const categoriesRepository = new CategoriesRepository()
+const categoriesRepository = new InMemoryCategoriesRepository()
 
 categoriesRoutes.post('/', (request, response) => {
-  const { name, description } = request.body
-  const categoryAlreadyExists = categoriesRepository.findByName(name)
-  if (categoryAlreadyExists)
-    return response.status(409).json({
-      error: 'Conflict',
-      reason: 'this category already exist',
-      statusCode: 409
+  try {
+    const createCategory = new CreateCategorySerice(categoriesRepository)
+    createCategory.execute(request.body)
+    return response.status(StatusCode.ok).send()
+  } catch (error) {
+    const statusCode = StatusCode.conflict
+    return response.status(statusCode).json({
+      error: 'Error',
+      reason: error,
+      statusCode: statusCode
     })
-  categoriesRepository.create({ name, description })
-  return response.status(201).send()
+  }
 })
 
-categoriesRoutes.get('/', (request, response) => {
-  const categories = categoriesRepository.findMany()
-  return response.status(200).json({
-    categories
-  })
-}) 
+categoriesRoutes.get('/', (_, response) => {
+  try {
+    const findAllcategories = new FindAllCategoriesService(categoriesRepository)
+    const allCategories = findAllcategories.execute()
+    return response.status(StatusCode.ok).json({
+      categories: allCategories
+    })
+  } catch (error) {
+    const statusCode = StatusCode.internalServerError
+    return response.status(statusCode).json({
+      error: "Internal server error",
+      reason: error,
+      statusCode
+    })
+  }
+})
