@@ -1,5 +1,5 @@
-import express, { json } from 'express'
-import { categoriesRoutes, categoriesRoutes } from './routes/categories.routes'
+import express from 'express'
+import { categoriesRoutes, } from './routes/categories.routes'
 import { specificationRouter } from './routes/specifications.routes'
 
 const port = 3333

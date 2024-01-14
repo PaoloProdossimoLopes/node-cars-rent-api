@@ -1,26 +1,14 @@
-import { Router } from 'express'
+import { Router, request, response } from 'express'
 import { InMemoryCategoriesRepository } from '../modules/cars/repositories/in-memory-cartegory-repository';
 import { StatusCode } from '../status-code';
-import { CreateCategorySerice } from '../modules/cars/services/create-category.service';
+import { CreateCategorySerice } from '../modules/cars/use-cases/create-category/create-category.service';
 import { FindAllCategoriesService } from '../modules/cars/services/find-all-categories.service';
+import { createCategoryController } from '../modules/cars/use-cases/create-category/index';
 
 export const categoriesRoutes = Router()
 const categoriesRepository = new InMemoryCategoriesRepository()
 
-categoriesRoutes.post('/', (request, response) => {
-  try {
-    const createCategory = new CreateCategorySerice(categoriesRepository)
-    createCategory.execute(request.body)
-    return response.status(StatusCode.ok).send()
-  } catch (error) {
-    const statusCode = StatusCode.conflict
-    return response.status(statusCode).json({
-      error: 'Error',
-      reason: error,
-      statusCode: statusCode
-    })
-  }
-})
+categoriesRoutes.post('/', createCategoryController.handle)
 
 categoriesRoutes.get('/', (_, response) => {
   try {

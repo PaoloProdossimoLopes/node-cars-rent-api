@@ -1,4 +1,4 @@
-import { CategoriesRepository } from "../repositories/categories-reopsitory"
+import { CategoriesRepository } from "../../repositories/categories-reopsitory"
 
 interface CreateCategorySericeInput {
   name: string
