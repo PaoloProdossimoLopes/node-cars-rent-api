@@ -8,4 +8,5 @@ export interface CreateCategoryData {
 export interface CategoriesRepository {
   findMany(): Category[]
   create(data: CreateCategoryData): Category
+  findByName(name: string): Category | null
 }

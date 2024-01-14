@@ -1,8 +1,8 @@
 import { Router } from 'express'
-import { InMemoryCategoriesRepository } from '../repositories/in-memory-cartegory-repository';
+import { InMemoryCategoriesRepository } from '../modules/cars/repositories/in-memory-cartegory-repository';
 import { StatusCode } from '../status-code';
-import { CreateCategorySerice } from '../services/create-category.service';
-import { FindAllCategoriesService } from '../services/find-all-categories.service';
+import { CreateCategorySerice } from '../modules/cars/services/create-category.service';
+import { FindAllCategoriesService } from '../modules/cars/services/find-all-categories.service';
 
 export const categoriesRoutes = Router()
 const categoriesRepository = new InMemoryCategoriesRepository()
