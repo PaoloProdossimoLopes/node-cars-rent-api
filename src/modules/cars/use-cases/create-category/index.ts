@@ -1,7 +1,7 @@
 import { InMemoryCategoriesRepository } from '../../repositories/in-memory-cartegory-repository';
+import { CreateCategoryService } from './create-category-service';
 import { CreateCategoryController } from './create-category.controller';
-import { CreateCategorySerice } from "./create-category.service";
 
-const categoriesRepository = new InMemoryCategoriesRepository()
-const createCategoryService = new CreateCategorySerice(categoriesRepository)
+const categoriesRepository = InMemoryCategoriesRepository.getInstance()
+const createCategoryService = new CreateCategoryService(categoriesRepository)
 export const createCategoryController = new CreateCategoryController(createCategoryService)

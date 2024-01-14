@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import { CreateCategorySerice } from "./create-category.service";
 import { StatusCode } from "../../../../status-code";
+import { CreateCategoryService } from "./create-category-service";
 
 export class CreateCategoryController {
-  constructor(private readonly createCategoryService: CreateCategorySerice){}
+  constructor(private readonly createCategoryService: CreateCategoryService){}
   async handle(request: Request, response: Response) {
     try {
       this.createCategoryService.execute(request.body)

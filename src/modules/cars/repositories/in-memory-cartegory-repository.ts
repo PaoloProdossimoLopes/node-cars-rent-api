@@ -2,7 +2,19 @@ import { Category } from "../model/category";
 import { CategoriesRepository, CreateCategoryData } from "./categories-reopsitory";
 
 export class InMemoryCategoriesRepository implements CategoriesRepository {
+  private static INSTANCE: InMemoryCategoriesRepository
+
   private categories: Category[] = []
+
+  private constructor() {}
+
+  public static getInstance() {
+    if (!InMemoryCategoriesRepository.INSTANCE) {
+      InMemoryCategoriesRepository.INSTANCE = new InMemoryCategoriesRepository()
+    }
+
+    return InMemoryCategoriesRepository.INSTANCE
+  }
   
   create({ name, description }: CreateCategoryData): Category {
     const category: Category = {
