@@ -1,6 +1,6 @@
 import { CategoriesRepository } from './../../repositories/categories-reopsitory';
 import fs from 'fs'
-import csvParse from 'csv-parse'
+import { parse, } from 'csv-parse'
 
 interface ImportCategory {
   name: string
@@ -17,14 +17,17 @@ export class ImportCategoryService {
       const categories: ImportCategory[] = []
       const stream = fs.createReadStream(file.path)
 
-      const parseFile = csvParse()
+      const parseFile = parse()
       stream.pipe(parseFile)
 
       parseFile.on('data', async (line: string[]) => {
         const [name, description] = line
         categories.push({ name, description })
       })
-      .on('end', () => resolve(categories))
+      .on('end', () => {
+        fs.promises.unlink(file.path)
+        resolve(categories)
+      })
       .on('error', (error: Error) => reject(error))
     })
   }
