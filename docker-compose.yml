@@ -20,8 +20,8 @@ services:
 # Parando o docker compose
 # `docker-compose stop`
 
-# Removendo o docker compose
-# `docker-compose down`
-
 # Para inicial um container ja criando porem parado
 # `docker-compose start`
+
+# Removendo o docker compose
+# `docker-compose down`
