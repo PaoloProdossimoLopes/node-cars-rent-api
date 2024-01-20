@@ -1,6 +1,6 @@
 import { CategoriesRepository } from './../../repositories/categories-reopsitory';
 import fs from 'fs'
-import { parse, } from 'csv-parse'
+import { parse } from 'csv-parse'
 
 interface ImportCategory {
   name: string

@@ -1,5 +1,4 @@
 import { InMemoryCategoriesRepository } from '../../repositories/in-memory-cartegory-repository';
-import { CategoriesRepository } from './../../repositories/categories-reopsitory';
 import { ImportCategoryController } from "./import-category.controller";
 import { ImportCategoryService } from "./import-category.service";
 
