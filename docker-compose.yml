@@ -1,6 +1,20 @@
 version: "3.7"
 
 services:
+  database-cars-rent:
+    image: postgres
+    container_name: database-cars-rent
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=cars-rent
+    volumes:
+      - pgdata:/data/postgres
+    #network_mode: host
+
   app:
     build: . #Isso vai executar o comando `docker build ... no Dockerfile'
     container_name: node-cars-rent
@@ -8,6 +22,11 @@ services:
       - 3333:3333 # Mapeando a portas, nesse caso a 3333
     volumes:
       - .:/usr/app
+    #network_mode: host
+
+volumes:
+  pgdata:
+    driver: local
 
 # Comando para rodar o docker compose
 # `docker-compose up` ou 
@@ -25,3 +44,6 @@ services:
 
 # Removendo o docker compose
 # `docker-compose down`
+
+# Para rodar o docker apos atualização do arquivo
+# `docker-compose up --force-recreate -d`
