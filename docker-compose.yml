@@ -1,49 +1,43 @@
-version: "3.7"
+version: "3.9"
 
 services:
-  database-cars-rent:
+  database: 
     image: postgres
-    container_name: database-cars-rent
+    container_name: database_ignite
     restart: always
-    ports:
+    ports: 
       - 5432:5432
     environment:
       - POSTGRES_USER=docker
-      - POSTGRES_PASSWORD=docker
-      - POSTGRES_DB=cars-rent
+      - POSTGRES_PASSWORD=ignite
+      - POSTGRES_DB=rentx
     volumes:
       - pgdata:/data/postgres
-    #network_mode: host
 
-  app:
-    build: . #Isso vai executar o comando `docker build ... no Dockerfile'
-    container_name: node-cars-rent
-    ports:
-      - 3333:3333 # Mapeando a portas, nesse caso a 3333
-    volumes:
-      - .:/usr/app
-    #network_mode: host
+  
+  redis:
+    image: redis:alpine
+    ports: 
+      - 6379:6379
+
+
+
+  # app:
+  #   build: .
+  #   container_name: rentx
+  #   restart: always
+  #   ports: 
+  #     - 3333:3333
+  #     - 9229:9229
+  #   volumes: 
+  #     - .:/usr/app
+  #   links: 
+  #     - database
+  #   depends_on:
+  #     - database
+
+
 
 volumes:
   pgdata:
     driver: local
-
-# Comando para rodar o docker compose
-# `docker-compose up` ou 
-# `docker-compose up -d` (comando para rodar em backgorund sem bloquear a aba do terminal)
-
-# Para ver os logs do container (quando esta em backegound)
-# - obs: use o container name (ex. container_name) 
-# `docker logs node-cars-rent -f
-
-# Parando o docker compose
-# `docker-compose stop`
-
-# Para inicial um container ja criando porem parado
-# `docker-compose start`
-
-# Removendo o docker compose
-# `docker-compose down`
-
-# Para rodar o docker apos atualização do arquivo
-# `docker-compose up --force-recreate -d`
