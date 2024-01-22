@@ -1,8 +1,8 @@
-# README para Projeto de Backend em Node com TS: Sistema de Gerenciamento de Carros
+# Sistema de Gerenciamento de Carros
 
-## Sobre o Projeto
-
-Este projeto é um sistema de backend desenvolvido em Node.js com TypeScript, voltado para o gerenciamento de carros, incluindo cadastro e listagem de veículos, gerenciamento de aluguéis e devoluções, e funcionalidades relacionadas à recuperação de senha dos usuários.
+Este projeto é um sistema de backend desenvolvido em Node.js com TypeScript, voltado para o gerenciamento de 
+carros, incluindo cadastro e listagem de veículos, gerenciamento de aluguéis e devoluções, e funcionalidades 
+relacionadas à recuperação de senha dos usuários.
 
 ## Funcionalidades
 
