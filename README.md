@@ -27,7 +27,7 @@ relacionadas à recuperação de senha dos usuários.
 
 ### Pré-requisitos
 
-- Node.js versão xx.xx
+- Node.js
 - npm ou yarn
 
 ### Passos para Instalação
